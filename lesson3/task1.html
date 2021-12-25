@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<head></head>
+<body>
+    <script>
+        'use strict';
+        let array = [];
+        for(let i = 0 ; i < 11; i++){
+            array[i] = i;
+        }
+
+        getOddOrEvenNumber(array);
+
+        function getOddOrEvenNumber(array){
+            for(let i=0; i < array.length; i++){
+                if(array[i] === 0){
+                    console.log(`${i} - это ноль`);
+                }
+                else{
+                    let result = array[i] % 2 === 0 ? `${i} - 'четное число` : `${i} - 'нечетное число`;
+                    console.log(result);
+                }
+            }
+        }
+    </script>
+</body>
