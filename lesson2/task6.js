@@ -1,93 +1,57 @@
 "use strict";
-/**
- * 
- * @param {float} sum 
- * @returns returns the value in the correct case
- */
-function convertToMonetaryForm(sum)
-{
-    let ruble = parseInt(sum);
-    let penny = sum * 100 % 100;
 
-    return `${convertToRubleForm(ruble)} ${convertToPennyForm(penny)}`;
+function convertToMonetaryForm(value)
+{
+    return `${convertToRuble(value)} ${convertToPenny(value * 100 % 100)}`;
 }
 
-function convertToRubleForm(sum)
+function convertToRuble(value)
 {
-    let result = "рублей";
-    let tempSum = sum;
+    let tempRuble = String(value).length > 2 ? value % 100 : value;
 
-        if (String(tempSum).length > 1)
-        {
-            if (parseInt(tempSum / 10) != 1)
-            {
-                tempSum %= 10;
-                result = getRubleCase(tempSum);
+    if (tempRuble / 10 == 1){
+                return `${value} рублей`;
             }
-        }
-        else
-        {
-            result = getRubleCase(tempSum);
-        }
-
-        return `${sum} ${result}`;
-}
-
-function convertToPennyForm(sum)
-{
-    let result = "копеек";
-    let tempSum = sum;
-
-        if (String(tempSum).length > 1)
-        {
-            if (parseInt(tempSum / 10) != 1)
-            {
-                tempSum %= 10;
-                result = getPennyCase(tempSum);
+            else if (String(tempRuble).length > 1){
+                tempRuble /= 10;
             }
-        }
-        else
-        {
-            result = getPennyCase(tempSum);
-        }
 
-        return `${sum} ${result}`;
+            switch (tempRuble){
+                case 1:{
+                        return `${value} рубль`;
+                    }
+                case 2:
+                case 3:
+                case 4:{
+                        return `${value} рубля`;
+                    }
+                default:{
+                        return `${value} рублей`;
+                    }
+            }
 }
 
-/**
- * the method converts the value of the passed variable into the corresponding case
- * @param {number} number value from 0 to 9
- * @returns returns the value in the correct case
- */
-function getRubleCase(number)
+function convertToPenny(value)
 {
-    if (number == 2 || number == 3 || number == 4)
-    {
-        return "рубля";
-    }
-    else if (number == 1)
-    {
-        return "рубль";
-    }
+    let tempPenny = String(value).length > 2 ? value % 100 : value;
 
-    return "рублей";
-}
+            if (tempPenny / 10 == 1){
+                return `${value} копеек`;
+            }else if (String(tempPenny).length > 1){
+                tempPenny /= 10;
+            }
 
-/**
- * the method converts the value of the passed variable into the corresponding case
- * @param {number} number value from 0 to 9
- * @returns returns the value in the correct case
- */
-function getPennyCase(number)
-{
-    if (number == 2 || number == 3 || number == 4)
-    {
-        return "копейки";
-    }
-    else if (number == 1)
-    {
-        return "копейка";
-    }
-
-    return "копеек";
+            switch (tempPenny){
+                case 1:{
+                        return `${value} копейка`;
+                    }
+                case 2:
+                case 3:
+                case 4:{
+                        return `${value} копейки`;
+                    }
+                default:{
+                        return `${value} копеек`;
+                    }
+                }
 }
