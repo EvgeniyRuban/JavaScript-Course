@@ -5,14 +5,14 @@ let game = {
     run(){
         while(true){
             this.shuffleTopics();
-            for(let i = 0; i < config.topics.length; i++){
-                config.topics[i].shuffleAnswers();
-                renderer.renderTopic(config.topics[i]);
+            for(let topic of config.topics){
+                topic.shuffleAnswers();
+                renderer.renderTopic(topic);
                 let answerNumber = null;
                 while(true){
                     answerNumber = prompt("Введите номер правильного ответа.");
-                    if(this.isInputValid(answerNumber = Number.parseInt(answerNumber))){
-                        if(config.topics[i].isAnswerCorrect(config.topics[i].answers[answerNumber - 1])){
+                    if(this.isInputValid(answerNumber = Number.parseInt(answerNumber), topic)){
+                        if(topic.isAnswerCorrect(topic.answers[answerNumber - 1])){
                             this.correctAnswersCounter++;
                         }
                         break;
@@ -22,12 +22,12 @@ let game = {
                         return
                     }
                     else{
-                        renderer.renderTopic(config.topics[i]);
+                        renderer.renderTopic(topic);
                         console.log("Некорректный номер ответа.");
                     }
                 }
             }
-            renderer.renderAscToContinue(this.correctAnswersCounter);
+            renderer.renderRequestContinuation(this.correctAnswersCounter);
             if(!confirm()){
                 return;
             }
@@ -46,8 +46,8 @@ let game = {
         }
     },
 
-    isInputValid(value){
-        return Number.isInteger(value) && value >= 1  && value <= 4;
+    isInputValid(value, topic){
+        return Number.isInteger(value) && value >= 1 && value <= topic.answers.length;
     }
 };
 

@@ -10,7 +10,7 @@ let renderer = {
         console.log("Спасибо за игру!");  
     },
 
-    renderAscToContinue(correctAnswersCounter){
+    renderRequestContinuation(correctAnswersCounter){
         console.clear();
         console.log(`Количество правильных ответов: ${correctAnswersCounter} из ${config.topics.length}`);
         console.log("Спасибо за игру!");  
