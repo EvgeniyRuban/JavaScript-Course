@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head></head>
+    <body>
+        <script>
+            "use strict";
+            let input = +prompt("Введите число от 0 - 999:")
+            let result = divinNumberByDigits(input);
+            alert(`${input}\nunits: ${result.units}\ntens: ${result.tens}\nhundreds: ${result.hundreds}`);
+            function divinNumberByDigits(number)
+            {
+                if(isNaN(number)){
+                    console.log("Фуникция не принемает NaN!");
+                    return {};
+                }
+                else if(!Number.isInteger(number)){
+                    console.log("Фуникция не принемает дробные числа!");
+                    return {};
+                }
+                else if(number < 0 || number > 999){
+                    console.log("Переданное число находится за приделами диапозона допустимых значений (0 - 900).")
+                }
+
+                return {
+                    units: number > 0 ? number % 10 : 0,
+                    tens: number > 9 ? Math.floor(number % 100 / 10) : 0,
+                    hundreds: number > 99 ? Math.floor(number % 1000 / 100) : 0
+                }
+            }
+        </script>
+    </body>
+</html>
